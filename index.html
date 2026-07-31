@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OdonTech — Sistema de Gestão para Clínicas Odontológicas</title>
+  <meta name="description"
+    content="OdonTech é o sistema completo de gestão para clínicas odontológicas. Agendamento, prontuário digital, anamnese, controle financeiro e muito mais. Teste grátis por 7 dias.">
+
+  <!-- Favicon (tooth emoji as SVG data URI) -->
+  <link rel="icon" href="favicon.ico">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ============================================
+       NAVBAR
+       ============================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="navbar-logo">
+        <img src="odontech_logo_horizontal_branco.svg" alt="OdonTech" class="logo-img">
+      </a>
+
+      <div class="navbar-links" id="navbarLinks">
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#planos">Planos</a>
+        <a href="#faq">FAQ</a>
+      </div>
+
+      <div class="navbar-cta">
+        <a href="https://sistema.odontech.app.br" class="btn btn-ghost btn-sm">Login</a>
+        <a href="https://sistema.odontech.app.br" class="btn btn-primary btn-sm">Comece grátis</a>
+      </div>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu de navegação">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" id="mobileNavClose" aria-label="Fechar menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+    <a href="#funcionalidades" onclick="closeMobileNav()">Funcionalidades</a>
+    <a href="#planos" onclick="closeMobileNav()">Planos</a>
+    <a href="#faq" onclick="closeMobileNav()">FAQ</a>
+    <a href="https://sistema.odontech.app.br" class="btn btn-ghost" onclick="closeMobileNav()">Login</a>
+    <a href="https://sistema.odontech.app.br" class="btn btn-primary" onclick="closeMobileNav()">Comece grátis</a>
+  </div>
+
+  <!-- ============================================
+       HERO
+       ============================================ -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z" />
+          </svg>
+          7 dias de teste grátis
+        </div>
+
+        <h1 class="hero-title">
+          Sua clínica ainda perde tempo com
+          <span class="highlight">fichas de papel?</span>
+        </h1>
+
+        <p class="hero-description">
+          Agenda bagunçada, letra ilegível, informação médica esquecida. O OdonTech organiza tudo — do agendamento ao
+          prontuário — para você focar no que importa: cuidar dos seus pacientes.
+        </p>
+
+        <div class="hero-actions">
+          <a href="https://sistema.odontech.app.br" class="btn btn-primary">
+            Comece grátis por 7 dias
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+          <a href="#funcionalidades" class="btn btn-ghost btn-sm">
+            Conhecer funcionalidades
+          </a>
+        </div>
+
+        <div class="hero-trust">
+          <div class="hero-trust-item">
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.5 5.5L7 10l-2.5-2" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Sem cartão de crédito
+          </div>
+          <div class="hero-trust-divider"></div>
+          <div class="hero-trust-item">
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.5 5.5L7 10l-2.5-2" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            100% online
+          </div>
+          <div class="hero-trust-divider"></div>
+          <div class="hero-trust-item">
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.5 5.5L7 10l-2.5-2" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Dados seguros
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <!-- Floating card 1 -->
+        <div class="hero-float hero-float-1">
+          <div class="float-icon green">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </div>
+          <div>
+            <div>Anamnese recebida</div>
+            <div class="float-text-small">Paciente preencheu online</div>
+          </div>
+        </div>
+
+        <!-- Dashboard mockup -->
+        <div class="hero-mockup">
+          <img src="dashboard-mockup.png" alt="Dashboard do OdonTech mostrando agenda e painel de controle da clínica"
+            width="1024" height="768">
+        </div>
+
+        <!-- Floating card 2 -->
+        <div class="hero-float hero-float-2">
+          <div class="float-icon blue">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4" />
+              <path d="M8 2v4" />
+              <path d="M3 10h18" />
+            </svg>
+          </div>
+          <div>
+            <div>Consulta confirmada</div>
+            <div class="float-text-small">Hoje às 14h30</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FUNCIONALIDADES
+       ============================================ -->
+  <section class="features" id="funcionalidades">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Funcionalidades</div>
+        <h2 class="section-title">Tudo que sua clínica precisa,<br>num só lugar</h2>
+        <p class="section-subtitle">
+          Do primeiro contato com o paciente até o controle financeiro — organize toda a operação da sua clínica sem
+          papel, sem planilha, sem retrabalho.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Agenda e Atendimentos -->
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon">
+            <!-- Calendar icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4" />
+              <path d="M8 2v4" />
+              <path d="M3 10h18" />
+              <path d="M8 14h.01" />
+              <path d="M12 14h.01" />
+              <path d="M16 14h.01" />
+              <path d="M8 18h.01" />
+              <path d="M12 18h.01" />
+            </svg>
+          </div>
+          <h3 class="feature-name">Agenda e Atendimentos</h3>
+          <p class="feature-description">
+            Agendamento por profissional, geração automática de atendimento a partir da consulta confirmada, histórico
+            completo por paciente e por dente tratado.
+          </p>
+        </div>
+
+        <!-- Ficha de Anamnese -->
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon">
+            <!-- Clipboard icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+              <path d="M12 11h4" />
+              <path d="M12 16h4" />
+              <path d="M8 11h.01" />
+              <path d="M8 16h.01" />
+            </svg>
+          </div>
+          <h3 class="feature-name">Ficha de Anamnese Completa</h3>
+          <p class="feature-description">
+            Formulário clínico digital cobrindo histórico médico completo: alergias, medicamentos, condições cardíacas e
+            respiratórias, gestação, cirurgias recentes, reações a anestesia e mais — tudo organizado e sempre
+            acessível.
+          </p>
+        </div>
+
+        <!-- Controle Financeiro -->
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-icon">
+            <!-- Dollar icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23" />
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+          </div>
+          <h3 class="feature-name">Controle Financeiro por Paciente</h3>
+          <p class="feature-description">
+            Acompanhe pagamentos e valores pendentes de cada paciente, sem depender de planilha paralela.
+          </p>
+        </div>
+
+        <!-- FEATURED: Autocadastro -->
+        <div class="feature-card featured reveal">
+          <div class="feature-icon">
+            <!-- Link/share icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+            </svg>
+          </div>
+          <div>
+            <div class="feature-badge">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z" />
+              </svg>
+              Funcionalidade destaque
+            </div>
+            <h3 class="feature-name">Autocadastro do Paciente com Anamnese Digital</h3>
+            <p class="feature-description">
+              Envie um link para o paciente preencher seus próprios dados e a ficha de anamnese antes da consulta —
+              chega de recepção digitando ficha, letra ilegível ou informação médica esquecida.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PLANOS E PREÇOS
+       ============================================ -->
+  <section class="pricing" id="planos">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Planos e Preços</div>
+        <h2 class="section-title">Escolha o plano ideal<br>para sua clínica</h2>
+        <p class="section-subtitle">
+          Todos os planos incluem 7 dias de teste grátis, sem cartão de crédito. Comece agora e veja a diferença na
+          prática.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Básico -->
+        <div class="pricing-card reveal reveal-delay-1" id="plan-basico">
+          <h3 class="pricing-plan-name">Básico</h3>
+          <div class="pricing-price">
+            <span class="pricing-currency">R$</span>
+            <span class="pricing-amount">59,90</span>
+            <span class="pricing-period">/mês</span>
+          </div>
+          <div class="pricing-trial">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+            7 dias grátis
+          </div>
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Até 3 profissionais
+            </div>
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Até 40 pacientes cadastrados
+            </div>
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Agenda e atendimentos
+            </div>
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Controle financeiro
+            </div>
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Gestão de equipe por papéis
+            </div>
+            <div class="pricing-feature">
+              <svg class="cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+              <span style="opacity: 0.5;">Autocadastro com anamnese digital</span>
+            </div>
+          </div>
+          <a href="https://sistema.odontech.app.br" class="btn btn-outline">Começar teste grátis</a>
+        </div>
+
+        <!-- Pro (popular) -->
+        <div class="pricing-card popular reveal reveal-delay-2" id="plan-pro">
+          <div class="pricing-badge">Mais Popular</div>
+          <h3 class="pricing-plan-name">Pro</h3>
+          <div class="pricing-price">
+            <span class="pricing-currency">R$</span>
+            <span class="pricing-amount">89,90</span>
+            <span class="pricing-period">/mês</span>
+          </div>
+          <div class="pricing-trial">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+            7 dias grátis
+          </div>
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Até 10 profissionais
+            </div>
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Até 100 pacientes cadastrados
+            </div>
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Agenda e atendimentos
+            </div>
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Controle financeiro
+            </div>
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Gestão de equipe por papéis
+            </div>
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Autocadastro com anamnese digital
+            </div>
+          </div>
+          <a href="https://sistema.odontech.app.br" class="btn btn-primary">Começar teste grátis</a>
+        </div>
+
+        <!-- Ultra -->
+        <div class="pricing-card reveal reveal-delay-3" id="plan-ultra">
+          <h3 class="pricing-plan-name">Ultra</h3>
+          <div class="pricing-price">
+            <span class="pricing-currency">R$</span>
+            <span class="pricing-amount">119,90</span>
+            <span class="pricing-period">/mês</span>
+          </div>
+          <div class="pricing-trial">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+            7 dias grátis
+          </div>
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Até 20 profissionais
+            </div>
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Até 200 pacientes cadastrados
+            </div>
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Agenda e atendimentos
+            </div>
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Controle financeiro
+            </div>
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Gestão de equipe por papéis
+            </div>
+            <div class="pricing-feature">
+              <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Autocadastro com anamnese digital
+            </div>
+          </div>
+          <a href="https://sistema.odontech.app.br" class="btn btn-outline">Começar teste grátis</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PROVA SOCIAL / DEPOIMENTOS (Placeholder)
+       ============================================ -->
+  <section class="testimonials" id="depoimentos">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Depoimentos</div>
+        <h2 class="section-title">O que dizem sobre o OdonTech</h2>
+        <p class="section-subtitle">
+          Veja como clínicas odontológicas estão transformando a rotina com o sistema.
+        </p>
+      </div>
+
+      <div class="testimonials-carousel reveal" id="testimonialsCarousel">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <!-- Depoimento — Dr. Persival Menezes -->
+            <div class="testimonial-card">
+              <div class="testimonial-stars">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              </div>
+              <p class="testimonial-text">
+                "O sistema ajudou muito a nossa clínica a sair do papel. Hoje temos um controle muito maior sobre os
+                procedimentos realizados em cada paciente, e o controle financeiro da clínica também melhorou bastante."
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">P</div>
+                <div>
+                  <div class="testimonial-name">Dr. Persival Menezes</div>
+                  <div class="testimonial-role">Dentista — Clínica Persival Batista Menezes</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Depoimento — Dra. Graciela Monteiro -->
+            <div class="testimonial-card">
+              <div class="testimonial-stars">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              </div>
+              <p class="testimonial-text">
+                "Depois que implantamos o sistema, nossa rotina ficou muito mais organizada. O cadastro integrado dos
+                pacientes facilita o atendimento e o acesso ao histórico de cada um, enquanto o controle financeiro ficou
+                muito mais prático. Hoje temos mais agilidade, segurança e confiança na gestão da clínica."
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">G</div>
+                <div>
+                  <div class="testimonial-name">Dra. Graciela Monteiro</div>
+                  <div class="testimonial-role">Dentista</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carousel controls: arrows + dots -->
+        <div class="carousel-controls">
+          <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Depoimento anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <div class="carousel-dots" id="carouselDots"></div>
+          <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="Próximo depoimento">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FAQ
+       ============================================ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Perguntas Frequentes</div>
+        <h2 class="section-title">Tire suas dúvidas</h2>
+        <p class="section-subtitle">
+          As respostas para as perguntas mais comuns sobre o OdonTech.
+        </p>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item reveal" id="faq-1">
+          <button class="faq-question" aria-expanded="false">
+            Preciso instalar algo ou é tudo online?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p>Não precisa instalar nada. O OdonTech é 100% online — basta abrir o navegador, fazer login e começar a
+              usar. Funciona em computador, tablet ou celular.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-delay-1" id="faq-2">
+          <button class="faq-question" aria-expanded="false">
+            O que acontece depois dos 7 dias de teste?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p>Após o período de teste, você escolhe o plano que mais se encaixa na sua clínica e continua usando
+              normalmente. Seus dados são mantidos e nada se perde.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-delay-2" id="faq-3">
+          <button class="faq-question" aria-expanded="false">
+            Posso trocar de plano depois?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p>Sim! Você pode fazer upgrade ou downgrade a qualquer momento, sem burocracia. A mudança é aplicada no
+              próximo ciclo de cobrança.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-delay-3" id="faq-4">
+          <button class="faq-question" aria-expanded="false">
+            Meus dados e os dos meus pacientes estão seguros?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p>Segurança é prioridade no OdonTech. Todos os acessos são protegidos por login seguro, e o sistema
+              registra quem criou ou alterou cada informação — garantindo rastreabilidade total.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-delay-4" id="faq-5">
+          <button class="faq-question" aria-expanded="false">
+            O autocadastro do paciente funciona pelo celular?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p>Sim! O paciente recebe um link e pode preencher seus dados e a ficha de anamnese diretamente pelo
+              celular, tablet ou computador — de onde estiver, antes mesmo de chegar à clínica.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CTA FINAL
+       ============================================ -->
+  <section class="cta-final" id="cta-final">
+    <div class="container reveal">
+      <h2 class="section-title">Pronto para organizar<br>sua clínica de verdade?</h2>
+      <p class="cta-final-text">
+        Comece agora com 7 dias de teste grátis. Sem cartão de crédito, sem compromisso. Veja na prática como o OdonTech
+        simplifica a rotina da sua clínica.
+      </p>
+      <div class="cta-final-actions">
+        <a href="https://sistema.odontech.app.br" class="btn btn-white">
+          Comece grátis por 7 dias
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </a>
+        <a href="#funcionalidades" class="btn btn-ghost btn-sm">Ver funcionalidades</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <a href="#" class="footer-logo">
+        <img src="odontech_logo_horizontal_branco.svg" alt="OdonTech" class="logo-img">
+      </a>
+
+      <div class="footer-links">
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#planos">Planos</a>
+        <a href="#faq">FAQ</a>
+      </div>
+
+      <div class="footer-copy">
+        &copy; 2026 OdonTech. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <script>
+    // ---- Navbar scroll effect ----
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // ---- Mobile nav ----
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileNavClose = document.getElementById('mobileNavClose');
+
+    menuToggle.addEventListener('click', () => {
+      mobileNav.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    function closeMobileNav() {
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    mobileNavClose.addEventListener('click', closeMobileNav);
+
+    // ---- FAQ accordion ----
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isActive = item.classList.contains('active');
+
+        // Close all others
+        document.querySelectorAll('.faq-item.active').forEach(activeItem => {
+          activeItem.classList.remove('active');
+          activeItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+
+        // Toggle current
+        if (!isActive) {
+          item.classList.add('active');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // ---- Testimonials carousel ----
+    (() => {
+      const track = document.querySelector('.carousel-track');
+      const cards = track.querySelectorAll('.testimonial-card');
+      const prevBtn = document.getElementById('carouselPrev');
+      const nextBtn = document.getElementById('carouselNext');
+      const dotsContainer = document.getElementById('carouselDots');
+      let currentIndex = 0;
+      let autoplayTimer;
+
+      // Generate dot indicators
+      cards.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.classList.add('carousel-dot');
+        if (i === 0) dot.classList.add('active');
+        dot.setAttribute('aria-label', `Depoimento ${i + 1}`);
+        dot.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = dotsContainer.querySelectorAll('.carousel-dot');
+
+      function goTo(index) {
+        currentIndex = index;
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+      }
+
+      function next() {
+        goTo(currentIndex >= cards.length - 1 ? 0 : currentIndex + 1);
+      }
+
+      function prev() {
+        goTo(currentIndex <= 0 ? cards.length - 1 : currentIndex - 1);
+      }
+
+      prevBtn.addEventListener('click', () => { prev(); resetAutoplay(); });
+      nextBtn.addEventListener('click', () => { next(); resetAutoplay(); });
+
+      // Autoplay
+      function startAutoplay() {
+        autoplayTimer = setInterval(next, 6000);
+      }
+
+      function resetAutoplay() {
+        clearInterval(autoplayTimer);
+        startAutoplay();
+      }
+
+      startAutoplay();
+
+      // Pause on hover
+      const carousel = document.getElementById('testimonialsCarousel');
+      carousel.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+      carousel.addEventListener('mouseleave', startAutoplay);
+
+      // Touch / swipe support
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      carousel.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      carousel.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) { next(); } else { prev(); }
+          resetAutoplay();
+        }
+      }, { passive: true });
+    })();
+
+    // ---- Scroll reveal animation ----
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // ---- Smooth scroll for anchor links ----
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(targetId);
+        if (target) {
+          const navbarHeight = navbar.offsetHeight;
+          const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight - 16;
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>
