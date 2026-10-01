@@ -220,6 +220,32 @@
           <symbol id="i-pulse" viewBox="0 0 24 24">
             <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
           </symbol>
+          <symbol id="i-chev-l" viewBox="0 0 24 24">
+            <path d="m15 18-6-6 6-6" />
+          </symbol>
+          <symbol id="i-chev-r" viewBox="0 0 24 24">
+            <path d="m9 18 6-6-6-6" />
+          </symbol>
+          <symbol id="i-list" viewBox="0 0 24 24">
+            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+          </symbol>
+          <symbol id="i-columns" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <path d="M9 3v18M15 3v18" />
+          </symbol>
+          <symbol id="i-plus" viewBox="0 0 24 24">
+            <path d="M12 5v14M5 12h14" />
+          </symbol>
+          <symbol id="i-x" viewBox="0 0 24 24">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </symbol>
+          <symbol id="i-clock" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 6v6l4 2" />
+          </symbol>
+          <symbol id="i-check" viewBox="0 0 24 24">
+            <path d="M20 6 9 17l-5-5" />
+          </symbol>
           <symbol id="i-user" viewBox="0 0 24 24">
             <circle cx="12" cy="8" r="4" />
             <path d="M20 21a8 8 0 0 0-16 0" />
@@ -241,7 +267,23 @@
         <div class="tour-grid">
           <!-- Textos que conduzem a rolagem -->
           <ol class="tour-steps">
-            <li class="tour-step is-active" data-screen="financeiro">
+            <li class="tour-step is-active" data-screen="agenda" data-agenda="lista">
+              <h3>A semana da clínica em uma lista</h3>
+              <p>Veja as consultas de cada dia em lista ou em grade e filtre por profissional. Confirme o paciente
+                direto na linha da consulta e acompanhe ao lado quantas estão a confirmar, confirmadas ou com falta.</p>
+            </li>
+            <li class="tour-step" data-screen="agenda" data-agenda="novo">
+              <h3>Agendar leva poucos segundos</h3>
+              <p>Clique no <strong>+</strong> ao lado do dia, busque o paciente por nome ou telefone e escolha o
+                profissional, o horário e a duração. Se o dentista já tiver alguém naquele horário, o sistema avisa
+                antes de salvar.</p>
+            </li>
+            <li class="tour-step" data-screen="agenda" data-agenda="detalhe">
+              <h3>Do agendamento à cadeira</h3>
+              <p>Na grade do dia, abra a consulta e leve o paciente por cada etapa: a confirmar, confirmado, em
+                atendimento e atendido. Dali mesmo você reagenda ou abre o prontuário.</p>
+            </li>
+            <li class="tour-step" data-screen="financeiro">
               <h3>O mês da clínica numa tela só</h3>
               <p>Receita total, o que já entrou e o que ainda está pendente. Veja quanto veio por PIX, cartão ou
                 dinheiro e quanto cada profissional faturou, sem montar planilha no fim do mês.</p>
@@ -270,7 +312,7 @@
             <div class="screen tour-screen">
               <div class="screen-bar">
                 <span class="dots"><i></i><i></i><i></i></span>
-                <span class="url">sistema.odontech.app.br/<b id="tourPath">financeiro</b></span>
+                <span class="url">sistema.odontech.app.br/<b id="tourPath">agenda</b></span>
               </div>
               <div class="app-viewport" id="appViewport">
                 <div class="app" id="app" aria-label="Demonstração interativa do sistema OdonTech com dados fictícios">
@@ -285,7 +327,10 @@
                       <span>Gestão odontológica</span>
                     </div>
                     <nav class="app-nav">
-                      <button type="button" data-go="financeiro" class="on"><svg class="ic">
+                      <button type="button" data-go="agenda" class="on"><svg class="ic">
+                          <use href="#i-cal" />
+                        </svg>Agenda</button>
+                      <button type="button" data-go="financeiro"><svg class="ic">
                           <use href="#i-dollar" />
                         </svg>Financeiro</button>
                       <button type="button" data-go="pacientes"><svg class="ic">
@@ -309,8 +354,55 @@
 
                   <div class="app-main">
 
+                    <!-- AGENDA -->
+                    <section class="scr scr-agenda is-on" data-screen="agenda" id="agenda">
+                      <header class="ag-head">
+                        <div class="ag-title" id="agTitle"></div>
+                        <div class="ag-nav">
+                          <button type="button" class="ag-ib" data-ag="prev" aria-label="Período anterior"><svg
+                              class="ic sm">
+                              <use href="#i-chev-l" />
+                            </svg></button>
+                          <button type="button" class="ag-btn" data-ag="today">Hoje</button>
+                          <button type="button" class="ag-ib" data-ag="next" aria-label="Próximo período"><svg
+                              class="ic sm">
+                              <use href="#i-chev-r" />
+                            </svg></button>
+                        </div>
+                        <div class="ag-views" role="group" aria-label="Visualização da agenda">
+                          <button type="button" data-view="grade"><svg class="ic sm">
+                              <use href="#i-columns" />
+                            </svg>Grade</button>
+                          <button type="button" data-view="lista"><svg class="ic sm">
+                              <use href="#i-list" />
+                            </svg>Lista</button>
+                        </div>
+                        <button type="button" class="btn-app" data-ag="new"><svg class="ic sm">
+                            <use href="#i-plus" />
+                          </svg>Novo agendamento</button>
+                      </header>
+                      <div class="ag-body" id="agBody">
+                        <aside class="ag-left">
+                          <select class="ag-input" id="agPro" aria-label="Filtrar por profissional">
+                            <option value="">Todos os profissionais</option>
+                            <option value="helena">Dra. Helena Duarte</option>
+                            <option value="rafael">Dr. Rafael Quintino</option>
+                            <option value="livia">Dra. Lívia Amaral</option>
+                          </select>
+                          <div class="panel ag-side">
+                            <div class="ag-cal" id="agCal"></div>
+                            <div class="ag-sum" id="agSum"></div>
+                          </div>
+                        </aside>
+                        <div class="panel ag-main" id="agMain"></div>
+                        <div class="ag-drawer-col">
+                          <aside class="panel ag-drawer" id="agDrawer"></aside>
+                        </div>
+                      </div>
+                    </section>
+
                     <!-- FINANCEIRO -->
-                    <section class="scr is-on" data-screen="financeiro">
+                    <section class="scr" data-screen="financeiro">
                       <header class="scr-head">
                         <div>
                           <h4>Dashboard financeiro</h4>
@@ -894,7 +986,7 @@
       const menu = document.getElementById('actionMenu');
       const toast = document.getElementById('appToast');
       const APP_W = 1000;
-      let current = 'financeiro';
+      let current = 'agenda';
       let lastStep = -1;
       let menuTimer, toastTimer;
 
@@ -926,6 +1018,470 @@
       }
       screens.forEach(sc => sc.toggleAttribute('inert', !sc.classList.contains('is-on')));
 
+      // ---------- Agenda ----------
+      const agenda = (() => {
+        const root = document.getElementById('agenda');
+        const body = document.getElementById('agBody');
+        const main = document.getElementById('agMain');
+        const cal = document.getElementById('agCal');
+        const sum = document.getElementById('agSum');
+        const drawer = document.getElementById('agDrawer');
+        const proSel = document.getElementById('agPro');
+        const titleEl = document.getElementById('agTitle');
+
+        const TODAY = new Date(2026, 8, 30);
+        const DAY_START = 8 * 60, DAY_END = 19 * 60, HOUR_PX = 44;
+        const PROS = { helena: 'Dra. Helena Duarte', rafael: 'Dr. Rafael Quintino', livia: 'Dra. Lívia Amaral' };
+        const PATIENTS = [
+          ['Mariana Souza Rocha', '(11) 98472-3316'], ['Carlos Eduardo Almeida', '(11) 99185-0427'],
+          ['Beatriz Nogueira Lima', '(11) 97730-6152'], ['João Pedro Vasconcelos', '(11) 98821-7743'],
+          ['Ana Clara Fontes', '(11) 96604-2298'], ['Fernanda Lopes', '(11) 99412-8830'],
+          ['Roberto Takeda', '(11) 98157-6604'], ['Lucas Martins Ribeiro', '(11) 97268-1195']
+        ];
+        const STATUS = {
+          confirmar: 'A confirmar', confirmado: 'Confirmado', atendimento: 'Em atendimento',
+          atendido: 'Atendido', falta: 'Faltou', cancelado: 'Cancelado'
+        };
+        const PLURAL = {
+          confirmar: 'A confirmar', confirmado: 'Confirmados', atendimento: 'Em atendimento',
+          atendido: 'Atendidos', falta: 'Faltas', cancelado: 'Cancelados'
+        };
+        const FLOW = ['confirmar', 'confirmado', 'atendimento', 'atendido'];
+        const NEXT = {
+          confirmar: ['Confirmar presença', 'confirmado', n => `Presença de ${n} confirmada.`],
+          confirmado: ['Iniciar atendimento', 'atendimento', n => `Atendimento de ${n} iniciado.`],
+          atendimento: ['Finalizar atendimento', 'atendido', n => `Atendimento de ${n} finalizado.`]
+        };
+        const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro',
+          'outubro', 'novembro', 'dezembro'];
+        const DIAS = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+        const DURS = [[30, '30 min'], [60, '1h'], [90, '1h30'], [120, '2h']];
+
+        const pad = n => String(n).padStart(2, '0');
+        const key = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+        const parse = k => { const [y, m, d] = k.split('-').map(Number); return new Date(y, m - 1, d); };
+        const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+        const weekStart = d => addDays(d, -d.getDay());
+        const hm = m => `${pad(Math.floor(m / 60))}:${pad(m % 60)}`;
+        const durTxt = m => (DURS.find(d => d[0] === m) || [0, m + ' min'])[1];
+        const first = n => n.split(' ')[0];
+        const cap = t => t[0].toUpperCase() + t.slice(1);
+        const short = d => `${DIAS[d.getDay()].slice(0, 3).toLowerCase()}, ${pad(d.getDate())}/${pad(d.getMonth() + 1)}`;
+        const longDate = d => `${DIAS[d.getDay()]}, ${d.getDate()} de ${MESES[d.getMonth()]}`;
+        const norm = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+        const icon = (id, cls = 'sm') => `<svg class="ic ${cls}" aria-hidden="true"><use href="#i-${id}" /></svg>`;
+        const chip = st => `<span class="ag-chip st-${st}">${STATUS[st]}</span>`;
+
+        let seq = 0;
+        const appts = [
+          [1, 540, 30, 'Carlos Eduardo Almeida', 'Limpeza e profilaxia', 'rafael', 'atendido'],
+          [2, 630, 30, 'Ana Clara Fontes', 'Avaliação', 'helena', 'falta'],
+          [3, 510, 30, 'João Pedro Vasconcelos', 'Manutenção do aparelho', 'rafael', 'atendido'],
+          [3, 600, 60, 'Mariana Souza Rocha', 'Retorno da restauração no 36', 'helena', 'atendimento'],
+          [3, 930, 30, 'Fernanda Lopes', 'Avaliação', 'livia', 'confirmar'],
+          [4, 540, 90, 'Roberto Takeda', 'Tratamento de canal, sessão 1', 'helena', 'confirmar'],
+          [4, 840, 60, 'Beatriz Nogueira Lima', 'Clareamento, sessão 2', 'livia', 'confirmado']
+        ].map(([d, start, dur, patient, note, pro, status]) =>
+          ({ id: ++seq, date: key(addDays(weekStart(TODAY), d)), start, dur, patient, note, pro, status }));
+
+        const st = { view: 'lista', cursor: TODAY, month: TODAY, pro: '', canceled: false, panel: null, flash: 0 };
+
+        const byId = id => appts.find(a => a.id === id);
+        const visible = a => (!st.pro || a.pro === st.pro) && (st.canceled || a.status !== 'cancelado');
+        const onDay = k => appts.filter(a => a.date === k && visible(a)).sort((a, b) => a.start - b.start);
+        const range = () => st.view === 'lista'
+          ? [...Array(7)].map((_, i) => key(addDays(weekStart(st.cursor), i)))
+          : [key(st.cursor)];
+
+        // ---- Cabeçalho
+        function renderHead() {
+          if (st.view === 'lista') {
+            const a = weekStart(st.cursor), b = addDays(a, 6);
+            const t = a.getMonth() === b.getMonth()
+              ? `${a.getDate()} a ${b.getDate()} de ${MESES[b.getMonth()]}`
+              : `${a.getDate()} de ${MESES[a.getMonth()].slice(0, 3)} a ${b.getDate()} de ${MESES[b.getMonth()].slice(0, 3)}`;
+            const now = key(a) === key(weekStart(TODAY));
+            titleEl.innerHTML = `<span><strong>${t}</strong><span>${now ? 'Esta semana' : a.getFullYear()}</span></span>`;
+          } else {
+            const d = st.cursor;
+            titleEl.innerHTML = `<b class="ag-bign">${d.getDate()}</b><span><strong>${cap(MESES[d.getMonth()])} de ${d.getFullYear()}</strong><span>${key(d) === key(TODAY) ? 'Hoje' : DIAS[d.getDay()]}</span></span>`;
+          }
+          root.querySelectorAll('[data-view]').forEach(b => {
+            const on = b.dataset.view === st.view;
+            b.classList.toggle('on', on);
+            b.setAttribute('aria-pressed', on);
+          });
+        }
+
+        // ---- Mini calendário
+        function renderCal() {
+          const m = st.month, start = weekStart(new Date(m.getFullYear(), m.getMonth(), 1));
+          const sel = range();
+          const has = new Set(appts.filter(visible).map(a => a.date));
+          let cells = '';
+          for (let i = 0; i < 42; i++) {
+            const d = addDays(start, i), k = key(d);
+            if (i === 35 && d.getMonth() !== m.getMonth()) break;
+            const cls = [d.getMonth() !== m.getMonth() && 'out', k === key(TODAY) && 'today',
+              sel.includes(k) && 'sel', has.has(k) && 'has'].filter(Boolean).join(' ');
+            cells += `<button type="button" class="${cls}" data-day="${k}" aria-label="${longDate(d)}">${d.getDate()}</button>`;
+          }
+          cal.innerHTML = `
+            <div class="ag-cal-head"><strong>${cap(MESES[m.getMonth()])} de ${m.getFullYear()}</strong>
+              <span><button type="button" class="ag-ib sm" data-ag="mprev" aria-label="Mês anterior">${icon('chev-l')}</button><button type="button" class="ag-ib sm" data-ag="mnext" aria-label="Próximo mês">${icon('chev-r')}</button></span></div>
+            <div class="ag-cal-grid">${['D', 'S', 'T', 'Q', 'Q', 'S', 'S'].map(l => `<i>${l}</i>`).join('')}${cells}</div>`;
+        }
+
+        // ---- Resumo por situação
+        function renderSum() {
+          const list = range().flatMap(k => appts.filter(a => a.date === k && (!st.pro || a.pro === st.pro)));
+          const n = list.filter(a => a.status !== 'cancelado').length;
+          const where = st.view === 'lista' ? 'nesta semana' : 'neste dia';
+          const rows = Object.keys(PLURAL).map(s =>
+            `<li><i class="sq st-${s}"></i>${PLURAL[s]}<b>${list.filter(a => a.status === s).length}</b></li>`).join('');
+          sum.innerHTML = `
+            <p><strong>${n ? `${n} ${n > 1 ? 'consultas' : 'consulta'}` : 'Nenhuma consulta'}</strong> ${where}</p>
+            <ul>${rows}</ul>
+            <label class="ag-check"><input type="checkbox" id="agCanceled" ${st.canceled ? 'checked' : ''}>Mostrar canceladas</label>`;
+        }
+
+        // ---- Lista da semana
+        function apptRow(a) {
+          const open = st.panel && st.panel.id === a.id;
+          return `<div class="ag-appt${open ? ' on' : ''}${st.flash === a.id ? ' flash' : ''}${a.status === 'cancelado' ? ' is-cancel' : ''}" data-open="${a.id}">
+              <span class="ag-time"><b>${hm(a.start)}</b>${hm(a.start + a.dur)}</span>
+              <span class="ag-who"><button type="button" data-open="${a.id}">${a.patient}</button><small>${a.note}</small></span>
+              <span class="ag-pro">${PROS[a.pro]}</span>
+              ${chip(a.status)}
+              <span class="ag-act">${a.status === 'confirmar' ? `<button type="button" class="ag-ib" data-confirm="${a.id}" title="Confirmar presença" aria-label="Confirmar presença de ${a.patient}">${icon('check')}</button>` : ''}</span>
+            </div>`;
+        }
+        function renderList() {
+          main.className = 'panel ag-main ag-list';
+          main.innerHTML = range().map(k => {
+            const d = parse(k), items = onDay(k), today = k === key(TODAY);
+            const count = items.length ? `${items.length} ${items.length > 1 ? 'consultas' : 'consulta'}` : 'Sem consultas';
+            return `<div class="ag-day${today ? ' today' : ''}">
+                <b>${d.getDate()}</b><span><strong>${today ? 'Hoje' : DIAS[d.getDay()]}</strong>${MESES[d.getMonth()]}</span>
+                <em>${count}</em>
+                ${k >= key(TODAY) ? `<button type="button" class="ag-ib" data-add="${k}" aria-label="Agendar em ${longDate(d)}">${icon('plus')}</button>` : '<i></i>'}
+              </div>${items.map(apptRow).join('')}`;
+          }).join('');
+        }
+
+        // ---- Grade do dia
+        function renderGrade() {
+          const k = key(st.cursor), items = onDay(k);
+          // Consultas que se sobrepõem dividem a largura
+          const lanes = [];
+          items.forEach(a => {
+            let l = lanes.findIndex(end => end <= a.start);
+            if (l < 0) { l = lanes.length; lanes.push(0); }
+            lanes[l] = a.start + a.dur;
+            a._lane = l;
+          });
+          const cols = Math.max(1, lanes.length);
+          let hours = '';
+          for (let m = DAY_START; m < DAY_END; m += 60) hours += `<div class="ag-hour"><span>${hm(m)}</span></div>`;
+          const blocks = items.map(a => {
+            const top = (a.start - DAY_START) / 60 * HOUR_PX, h = a.dur / 60 * HOUR_PX - 3;
+            const open = st.panel && st.panel.id === a.id;
+            return `<button type="button" class="ag-block st-${a.status}${open ? ' on' : ''}${a.dur < 60 ? ' tight' : ''}${st.flash === a.id ? ' flash' : ''}" data-open="${a.id}"
+                style="top:${top}px;height:${h}px;left:calc(${a._lane} * (100% / ${cols}));width:calc(100% / ${cols} - 6px)">
+                <b>${hm(a.start)}</b> ${a.patient}<small>${a.note}</small></button>`;
+          }).join('');
+          const now = k === key(TODAY) ? `<i class="ag-now" style="top:${(10 * 60 + 20 - DAY_START) / 60 * HOUR_PX}px"></i>` : '';
+          main.className = 'panel ag-main ag-grade';
+          main.innerHTML = `<div class="ag-grid" style="height:${(DAY_END - DAY_START) / 60 * HOUR_PX}px">${hours}
+              <div class="ag-lane" data-slot title="Clique num horário livre para agendar">${blocks}${now}</div></div>
+              ${items.length ? '' : '<p class="ag-empty">Nenhuma consulta neste dia. Clique num horário para agendar.</p>'}`;
+        }
+
+        function render() {
+          renderHead(); renderCal(); renderSum();
+          st.view === 'lista' ? renderList() : renderGrade();
+          body.classList.toggle('has-drawer', !!st.panel);
+          drawer.parentElement.inert = !st.panel;
+          reveal(main.querySelector('.ag-appt.on, .flash'));
+        }
+
+        // Rola só o painel (scrollIntoView rolaria a página inteira)
+        function reveal(el) {
+          if (!el) return;
+          const top = el.offsetTop - 8, bottom = el.offsetTop + el.offsetHeight + 8;
+          if (top < main.scrollTop) main.scrollTop = top;
+          else if (bottom > main.scrollTop + main.clientHeight) main.scrollTop = bottom - main.clientHeight;
+        }
+
+        function go(date) {
+          st.cursor = date;
+          st.month = date;
+          render();
+        }
+
+        // ---- Painel da consulta
+        function openDetail(id) {
+          st.panel = { mode: 'detail', id };
+          renderDetail();
+          render();
+        }
+        function renderDetail() {
+          const a = byId(st.panel.id), d = parse(a.date);
+          const idx = FLOW.indexOf(a.status);
+          const steps = idx < 0
+            ? `<p class="ag-note ag-warn">${a.status === 'falta' ? `${first(a.patient)} não compareceu. Reagende para não perder o tratamento.` : 'Esta consulta foi cancelada e o horário ficou livre.'}</p>`
+            : `<ol class="ag-steps">${FLOW.map((s, i) => `<li class="${i < idx ? 'done' : i === idx ? 'now' : ''}"><i></i>${STATUS[s]}</li>`).join('')}</ol>`;
+          const next = NEXT[a.status];
+          const primary = next
+            ? `<button type="button" class="btn-app ag-wide" data-ag="advance">${icon('check')}${next[0]}</button>`
+            : a.status === 'atendido'
+              ? `<p class="ag-done">${icon('check')}Atendimento concluído</p>`
+              : a.status === 'falta' ? `<button type="button" class="btn-app ag-wide" data-ag="resched">Reagendar consulta</button>` : '';
+          const closed = a.status === 'cancelado' || a.status === 'atendido';
+          drawer.innerHTML = `
+            <div class="ag-dr-head">
+              <div>${chip(a.status)}<h5>${a.patient}</h5></div>
+              <button type="button" class="ag-ib" data-ag="close" aria-label="Fechar">${icon('x')}</button>
+            </div>
+            <div class="ag-dr-body">
+              <ul class="ag-facts">
+                <li>${icon('cal')}${longDate(d)}</li>
+                <li>${icon('clock')}${hm(a.start)} às ${hm(a.start + a.dur)} <span>(${durTxt(a.dur)})</span></li>
+                <li>${icon('steth')}${PROS[a.pro]}</li>
+              </ul>
+              ${a.note ? `<p class="ag-note">${a.note}</p>` : ''}
+              ${steps}
+            </div>
+            <div class="ag-dr-foot">
+              ${primary}
+              <div class="ag-pair">
+                ${a.status === 'falta' || a.status === 'cancelado' ? '' : `<button type="button" class="ag-btn" data-ag="resched" ${closed ? 'disabled' : ''}>Reagendar</button>`}
+                <button type="button" class="ag-btn" data-ag="chart">${icon('file')}Prontuário</button>
+              </div>
+              ${closed || a.status === 'falta' ? '' : '<button type="button" class="ag-link" data-ag="cancel">Cancelar consulta</button>'}
+            </div>`;
+        }
+
+        // ---- Formulário de agendamento
+        function openForm(opts) {
+          st.panel = Object.assign({ mode: 'new', id: 0, patient: '', pro: st.pro, date: key(st.cursor), start: 540, dur: 30, note: '' }, opts);
+          if (st.panel.date < key(TODAY)) st.panel.date = key(TODAY);
+          renderForm();
+          render();
+        }
+        function renderForm() {
+          const f = st.panel, edit = f.mode === 'edit';
+          const dates = [...Array(14)].map((_, i) => addDays(TODAY, i));
+          if (!dates.some(d => key(d) === f.date)) dates.unshift(parse(f.date));
+          let times = '';
+          for (let m = DAY_START; m <= DAY_END - 60; m += 30) times += `<option value="${m}" ${m === f.start ? 'selected' : ''}>${hm(m)}</option>`;
+          drawer.innerHTML = `
+            <div class="ag-dr-head">
+              <div><span class="ag-kicker" id="agFDate">${longDate(parse(f.date))}</span><h5>${edit ? 'Reagendar consulta' : 'Novo agendamento'}</h5></div>
+              <button type="button" class="ag-ib" data-ag="close" aria-label="Fechar">${icon('x')}</button>
+            </div>
+            <div class="ag-dr-body ag-form">
+              <div class="ag-field"><span class="ag-lb" id="agLbPat">Paciente</span><div id="agPatient"></div></div>
+              <label class="ag-field"><span class="ag-lb">Profissional</span>
+                <select class="ag-input" id="agFPro"><option value="">Selecione o profissional</option>
+                  ${Object.entries(PROS).map(([v, n]) => `<option value="${v}" ${v === f.pro ? 'selected' : ''}>${n}</option>`).join('')}
+                </select></label>
+              <div class="ag-two">
+                <label class="ag-field"><span class="ag-lb">Data</span>
+                  <select class="ag-input" id="agFDay">${dates.map(d => `<option value="${key(d)}" ${key(d) === f.date ? 'selected' : ''}>${short(d)}${key(d) === key(TODAY) ? ' (hoje)' : ''}</option>`).join('')}</select></label>
+                <label class="ag-field"><span class="ag-lb">Horário</span>
+                  <select class="ag-input" id="agFTime">${times}</select></label>
+              </div>
+              <p class="ag-error" id="agFErr" role="alert"></p>
+              <div class="ag-field"><span class="ag-lb">Duração</span>
+                <div class="ag-seg" role="group" aria-label="Duração">${DURS.map(([m, t]) => `<button type="button" data-dur="${m}" aria-pressed="${m === f.dur}">${t}</button>`).join('')}</div>
+                <small class="ag-hint" id="agFEnd"></small>
+              </div>
+              ${edit ? '' : `<label class="ag-field"><span class="ag-lb">Observação <em>(opcional)</em></span>
+                <textarea class="ag-input" id="agFNote" rows="2" placeholder="Ex.: avaliação, retorno de canal, limpeza">${f.note}</textarea></label>`}
+            </div>
+            <div class="ag-dr-foot ag-row">
+              <button type="button" class="ag-btn" data-ag="close">Descartar</button>
+              <button type="button" class="btn-app" data-ag="save" id="agFSave">${edit ? 'Salvar novo horário' : 'Agendar consulta'}</button>
+            </div>`;
+          renderPatient();
+          syncForm();
+        }
+        function renderPatient(q = '') {
+          const f = st.panel, box = drawer.querySelector('#agPatient');
+          if (f.patient) {
+            const p = PATIENTS.find(x => x[0] === f.patient);
+            box.innerHTML = `<div class="ag-picked"><span class="av">${f.patient[0]}</span><span><strong>${f.patient}</strong>${p ? p[1] : ''}</span>
+              ${f.mode === 'edit' ? '' : '<button type="button" class="ag-link" data-ag="unpick">Trocar</button>'}</div>`;
+            return;
+          }
+          box.innerHTML = `<label class="search ag-search">${icon('search')}<input type="search" id="agFQ" autocomplete="off" aria-labelledby="agLbPat" placeholder="Buscar por nome ou telefone" value="${q}"></label><ul class="ag-sugg" id="agSugg" hidden></ul>`;
+        }
+        function renderSugg(q) {
+          const ul = drawer.querySelector('#agSugg');
+          const nq = norm(q.trim()), dq = q.replace(/\D/g, '');
+          const hits = PATIENTS.filter(([n, t]) => norm(n).includes(nq) || (dq.length > 2 && t.replace(/\D/g, '').includes(dq))).slice(0, 4);
+          ul.innerHTML = hits.length
+            ? hits.map(([n, t]) => `<li><button type="button" data-pick="${n}"><strong>${n}</strong>${t}</button></li>`).join('')
+            : '<li class="ag-none">Nenhum paciente encontrado. Confira o nome ou cadastre em Pacientes.</li>';
+          ul.hidden = false;
+        }
+        function conflict(f) {
+          return appts.find(a => a.id !== f.id && a.pro === f.pro && a.date === f.date && a.status !== 'cancelado' &&
+            a.start < f.start + f.dur && f.start < a.start + a.dur);
+        }
+        function syncForm() {
+          const f = st.panel;
+          drawer.querySelector('#agFEnd').textContent = `Termina às ${hm(f.start + f.dur)}.`;
+          drawer.querySelector('#agFDate').textContent = longDate(parse(f.date));
+          drawer.querySelector('#agFSave').disabled = !(f.patient && f.pro);
+          drawer.querySelector('#agFErr').textContent = '';
+          drawer.querySelectorAll('[data-dur]').forEach(b => b.setAttribute('aria-pressed', +b.dataset.dur === f.dur));
+        }
+        function save() {
+          const f = st.panel, c = conflict(f);
+          if (c) {
+            drawer.querySelector('#agFErr').textContent =
+              `${PROS[f.pro]} já atende ${first(c.patient)} das ${hm(c.start)} às ${hm(c.start + c.dur)} nesse dia. Escolha outro horário ou profissional.`;
+            const box = drawer.querySelector('.ag-dr-body');
+            box.scrollTop = drawer.querySelector('#agFErr').offsetTop - 70;
+            return;
+          }
+          const d = parse(f.date);
+          let a;
+          if (f.mode === 'edit') {
+            a = byId(f.id);
+            Object.assign(a, { date: f.date, start: f.start, dur: f.dur, pro: f.pro, status: 'confirmar' });
+            say(`Consulta de ${first(a.patient)} reagendada para ${short(d)} às ${hm(f.start)}.`);
+          } else {
+            a = { id: ++seq, date: f.date, start: f.start, dur: f.dur, patient: f.patient, note: f.note.trim() || 'Consulta', pro: f.pro, status: 'confirmar' };
+            appts.push(a);
+            say(`Consulta de ${first(a.patient)} agendada para ${short(d)} às ${hm(f.start)}.`);
+          }
+          if (st.pro && st.pro !== a.pro) { st.pro = ''; proSel.value = ''; }
+          st.panel = null;
+          st.flash = a.id;
+          go(d);
+          setTimeout(() => { st.flash = 0; main.querySelectorAll('.flash').forEach(x => x.classList.remove('flash')); }, 1600);
+        }
+
+        function close() {
+          st.panel = null;
+          render();
+        }
+
+        // ---- Eventos
+        root.addEventListener('click', e => {
+          const t = e.target.closest('button, [data-open], [data-slot]');
+          if (!t || !root.contains(t)) {
+            if (!e.target.closest('#agPatient')) drawer.querySelector('#agSugg')?.setAttribute('hidden', '');
+            return;
+          }
+          const ag = t.dataset.ag;
+          if (t.dataset.view) { st.view = t.dataset.view; st.panel = null; return render(); }
+          if (t.dataset.day) {
+            const d = parse(t.dataset.day);
+            return go(d);
+          }
+          if (t.dataset.add) return openForm({ date: t.dataset.add, start: t.dataset.add === key(TODAY) ? 990 : 540 });
+          if (t.dataset.confirm) {
+            const a = byId(+t.dataset.confirm);
+            a.status = 'confirmado';
+            say(`Presença de ${first(a.patient)} confirmada.`);
+            if (st.panel && st.panel.id === a.id && st.panel.mode === 'detail') renderDetail();
+            return render();
+          }
+          if (t.dataset.pick) {
+            st.panel.patient = t.dataset.pick;
+            renderPatient();
+            return syncForm();
+          }
+          if (t.dataset.dur) { st.panel.dur = +t.dataset.dur; return syncForm(); }
+          if (t.dataset.open) return openDetail(+t.dataset.open);
+          if (t.hasAttribute('data-slot')) {
+            // Clique num horário livre da grade abre o agendamento já no horário
+            const s = parseFloat(getComputedStyle(viewport).getPropertyValue('--s')) || 1;
+            const y = (e.clientY - t.getBoundingClientRect().top) / s;
+            const m = Math.min(DAY_END - 60, DAY_START + Math.floor(y / (HOUR_PX / 2)) * 30);
+            return openForm({ date: key(st.cursor), start: m });
+          }
+          const a = st.panel && st.panel.mode === 'detail' ? byId(st.panel.id) : null;
+          switch (ag) {
+            case 'prev': case 'next': {
+              const n = (ag === 'prev' ? -1 : 1) * (st.view === 'lista' ? 7 : 1);
+              return go(addDays(st.cursor, n));
+            }
+            case 'today': return go(TODAY);
+            case 'mprev': case 'mnext':
+              st.month = new Date(st.month.getFullYear(), st.month.getMonth() + (ag === 'mprev' ? -1 : 1), 1);
+              return renderCal();
+            case 'new': return openForm({});
+            case 'close': return close();
+            case 'save': return save();
+            case 'unpick':
+              st.panel.patient = '';
+              renderPatient();
+              syncForm();
+              return drawer.querySelector('#agFQ').focus({ preventScroll: true });
+            case 'advance': {
+              const [, to, msg] = NEXT[a.status];
+              a.status = to;
+              say(msg(first(a.patient)));
+              renderDetail();
+              return render();
+            }
+            case 'resched':
+              return openForm({ mode: 'edit', id: a.id, patient: a.patient, pro: a.pro, date: a.date < key(TODAY) ? key(addDays(TODAY, 1)) : a.date, start: a.start, dur: a.dur });
+            case 'cancel':
+              a.status = 'cancelado';
+              say(`Consulta de ${first(a.patient)} cancelada. O horário ficou livre.`);
+              st.panel = null;
+              return render();
+            case 'chart':
+              if (a.patient === 'Mariana Souza Rocha') return show('prontuario', false);
+              return say('Na demonstração, só o prontuário da Mariana está preenchido.');
+          }
+        });
+
+        root.addEventListener('input', e => {
+          if (e.target.id === 'agFQ') renderSugg(e.target.value);
+          if (e.target.id === 'agFNote') st.panel.note = e.target.value;
+        });
+        root.addEventListener('focusin', e => { if (e.target.id === 'agFQ') renderSugg(e.target.value); });
+        root.addEventListener('change', e => {
+          const id = e.target.id;
+          if (id === 'agPro') { st.pro = e.target.value; return render(); }
+          if (id === 'agCanceled') { st.canceled = e.target.checked; return render(); }
+          if (id === 'agFPro') st.panel.pro = e.target.value;
+          if (id === 'agFDay') st.panel.date = e.target.value;
+          if (id === 'agFTime') st.panel.start = +e.target.value;
+          if (st.panel) syncForm();
+        });
+        root.addEventListener('keydown', e => {
+          if (e.key === 'Escape' && st.panel) close();
+          if (e.key === 'Enter' && e.target.id === 'agFQ') {
+            const hit = drawer.querySelector('#agSugg [data-pick]');
+            if (hit) { e.preventDefault(); hit.click(); }
+          }
+        });
+
+        render();
+
+        // Estados que cada passo do tour mostra
+        return {
+          set(state) {
+            st.cursor = st.month = TODAY;
+            if (state === 'lista') { st.view = 'lista'; st.panel = null; render(); }
+            if (state === 'novo') { st.view = 'lista'; openForm({ date: key(addDays(TODAY, 1)), start: 660 }); }
+            if (state === 'detalhe') {
+              st.view = 'grade';
+              const f = appts.find(a => a.patient === 'Fernanda Lopes' && a.status !== 'cancelado');
+              f ? openDetail(f.id) : (st.panel = null, render());
+            }
+          }
+        };
+      })();
+
       // Qual passo está no foco da leitura
       function pickStep() {
         const mobile = window.matchMedia('(max-width: 900px)').matches;
@@ -936,6 +1492,7 @@
           lastStep = idx;
           steps.forEach((st, i) => st.classList.toggle('is-active', i === idx));
           show(steps[idx].dataset.screen, true);
+          if (steps[idx].dataset.agenda) agenda.set(steps[idx].dataset.agenda);
         }
       }
       let ticking = false;
