@@ -256,13 +256,11 @@ h2 {
 .nav-logo {
   display: flex;
   flex-shrink: 0;
-  margin-left: -12px;
 }
 
 .nav-logo img {
-  height: 66px;
+  height: 40px;
   width: auto;
-  margin-block: -4px;
 }
 
 .nav-links {
@@ -2979,7 +2977,7 @@ button.kebab:hover,
 }
 
 .footer-inner .nav-logo img {
-  height: 58px;
+  height: 36px;
 }
 
 .footer-inner nav {
